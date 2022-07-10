@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class mySpawner : MonoBehaviour
 {
-    [SerializeField] float spawnTime = 3f;
+    [SerializeField] float spawnTime = 5f;
     [SerializeField] Component spawnItem;
 
     float lastSpawn;
