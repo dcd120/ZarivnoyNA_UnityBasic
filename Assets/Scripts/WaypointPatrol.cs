@@ -7,8 +7,9 @@ public class WaypointPatrol : MonoBehaviour
 {
     [SerializeField] NavMeshAgent navMeshAgent;
     [SerializeField] Transform[] waypoints;
+    [SerializeField] Animator m_Animator;
 
-    int m_CurrentWaypointIndex;
+    private int m_CurrentWaypointIndex;
 
     void Start()
     {
@@ -19,6 +20,7 @@ public class WaypointPatrol : MonoBehaviour
     void Update()
     {
         if (waypoints.Length == 0) return;
+        m_Animator.SetBool("IsWalking", true);
         if (navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance)
         {
             m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;

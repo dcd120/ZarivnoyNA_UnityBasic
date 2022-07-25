@@ -5,14 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class GameEnding : MonoBehaviour
 {
-    [SerializeField] float fadeDuration = 1f;
-    [SerializeField] float displayImageDuration = 10f;
-    [SerializeField] GameObject player;
-    [SerializeField] CanvasGroup exitBackgroundImageCanvasGroup;
+    [SerializeField] public float fadeDuration = 1f;
+    [SerializeField] public float displayImageDuration = 10f;
+    [SerializeField] public GameObject player;
+    [SerializeField] public CanvasGroup exitBackgroundImageCanvasGroup;
 
-
-    bool m_IsPlayerAtExit = false;
-    float m_Timer;
+    private bool m_IsPlayerAtExit = false;
+    private float m_Timer;
 
     void OnTriggerEnter(Collider other)
     {

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class mySpawner : MonoBehaviour
 {
-    [SerializeField] float spawnTime = 5f;
-    [SerializeField] Component spawnItem;
+    [SerializeField] public float spawnTime = 5f;
+    [SerializeField] public Component spawnItem;
 
-    float lastSpawn;
+    private float lastSpawn;
     // Start is called before the first frame update
     void Start()
     {

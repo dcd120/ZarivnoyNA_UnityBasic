@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class myHero : MonoBehaviour
 {
-    Vector3 m_Movement;
-    Animator m_Animator;
-    Rigidbody m_Rigidbody;
-    AudioSource m_FootSteps;
+    private Vector3 m_Movement;
+    private Animator m_Animator;
+    private Rigidbody m_Rigidbody;
+    private AudioSource m_FootSteps;
 
-    [SerializeField] float turnSpeed = 20f;
-    [SerializeField] float jumpPower = 1.5f;
-    Quaternion m_Rotation = Quaternion.identity;
+    [SerializeField] public float turnSpeed = 20f;
+    [SerializeField] public float jumpPower = 1.5f;
+    private Quaternion m_Rotation = Quaternion.identity;
 
-    [SerializeField] Component fire;
-
+    [SerializeField] public Component fire;
 
     // Start is called before the first frame update
     void Start()

@@ -2473,6 +2473,7 @@ GameObject:
   - component: {fileID: 2608285594786753625}
   - component: {fileID: 2698130156580688383}
   - component: {fileID: 2717705471103632899}
+  - component: {fileID: 2955475224245453242}
   - component: {fileID: 2603757761373444431}
   - component: {fileID: 2603757761373444430}
   - component: {fileID: 5729624248684334020}
@@ -2567,6 +2568,21 @@ MonoBehaviour:
     - prefab: {fileID: 100000, guid: 790f4551bb671cc43bea7a0943c1162f, type: 3}
     slots: 4
   disabledGraySkeleton: {fileID: 0}
+--- !u!114 &2955475224245453242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2604791759765429169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 158d4773cef370644a4c7072301cd625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 1
+  regeneration: 0.01
+  theOne: {fileID: 0}
 --- !u!54 &2603757761373444431
 Rigidbody:
   m_ObjectHideFlags: 0

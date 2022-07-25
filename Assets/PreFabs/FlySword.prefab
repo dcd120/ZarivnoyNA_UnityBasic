@@ -151,6 +151,7 @@ MonoBehaviour:
   boomSound: {fileID: 9222971566520420564}
   lifeTime: 10
   deathTime: 3
+  flyStartPos: 0.3
 --- !u!54 &5612550009209029034
 Rigidbody:
   m_ObjectHideFlags: 0
