@@ -1479,6 +1479,7 @@ GameObject:
   - component: {fileID: 6428734136726707387}
   - component: {fileID: 6356471775988284596}
   - component: {fileID: 4375916346269758355}
+  - component: {fileID: 7321262855375747741}
   m_Layer: 0
   m_Name: Enemy_A
   m_TagString: Untagged
@@ -1599,6 +1600,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &7321262855375747741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6387443618297234335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 158d4773cef370644a4c7072301cd625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+  regeneration: 0.01
+  theOne: {fileID: 0}
 --- !u!1 &6387446647565401603
 GameObject:
   m_ObjectHideFlags: 0

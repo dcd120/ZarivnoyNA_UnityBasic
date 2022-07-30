@@ -4,29 +4,35 @@ using UnityEngine;
 
 public class FlyingSword : MonoBehaviour
 {
-    CapsuleCollider m_CapsuleCollider;
-    Rigidbody m_Rigidbody;
+    private CapsuleCollider m_CapsuleCollider;
+    private Rigidbody m_Rigidbody;
 
-    [SerializeField] AudioSource throwSound;
-    [SerializeField] AudioSource boomSound;
+    [SerializeField] public int damage = 1;
 
-    [SerializeField] float lifeTime = 10f;
-    [SerializeField] float deathTime = 3f;
+    [SerializeField] public AudioSource throwSound;
+    [SerializeField] public AudioSource boomSound;
 
-    float createTime;
-    float boomTime;
-    Vector3 addV;
-    bool m_isTrigged;
+    [SerializeField] public float lifeTime = 10f;
+    [SerializeField] public float deathTime = 3f;
+
+    [SerializeField] public float flyStartPos = 0.1f;
+
+    private float createTime;
+    private float boomTime;
+    private Vector3 addV;
+    private bool m_isTrigged;
     // Start is called before the first frame update
     void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
         m_CapsuleCollider = GetComponent<CapsuleCollider>();
-        addV = new Vector3(0, 0.3f, 0);
+        addV = new Vector3(0, flyStartPos, 0);
         m_Rigidbody.AddForce(transform.forward + addV, ForceMode.Impulse);
         throwSound.Play();
         createTime = Time.fixedTime;
         m_isTrigged = false;
+
+        //Debug.Log($"Создан меч: {createTime}");
     }
 
     // Update is called once per frame
@@ -34,11 +40,15 @@ public class FlyingSword : MonoBehaviour
     {
         if ((other.tag == "Enemy")&&(!m_isTrigged))
         {
-            other.gameObject.SetActive(false);
+            //other.gameObject.SetActive(false);
             boomSound.Play();
             boomTime = Time.fixedTime;
             m_isTrigged = true;
             m_CapsuleCollider.isTrigger = false;
+
+            other.GetComponent<Health>().GetDamage(damage);
+
+            //Debug.Log($"Мечь затупился о врага: {boomTime}");
         }
     }
 
@@ -46,16 +56,19 @@ public class FlyingSword : MonoBehaviour
     {
         if (m_isTrigged)
         {
-            if (boomTime + deathTime > Time.fixedTime)
+            if (boomTime + deathTime < Time.fixedTime)
             {
+                //Debug.Log($"Мечь убран по истечению времени уничтожения: {boomTime + deathTime} из {Time.fixedTime}");
                 transform.gameObject.SetActive(false);
             }
         } else {
-            if (createTime + lifeTime > Time.fixedTime)
+            if (createTime + lifeTime < Time.fixedTime)
             {
                 m_CapsuleCollider.isTrigger = false;
                 m_isTrigged = true;
                 boomSound.Play();
+                boomTime = Time.fixedTime;
+                //Debug.Log($"Мечь отжил свое, запускаем самоуничтожение: {createTime + lifeTime} из {Time.fixedTime}");
             }
         }
     }
