@@ -1016,7 +1016,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.4575311, y: 1}
+    m_SensorSize: {x: 1.1313702, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1032,14 +1032,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2057647791}
     m_Modifications:
-    - target: {fileID: -2739548588873964151, guid: 6aef0386cb28edc499fff908da4c1faf, type: 3}
-      propertyPath: m_StoppingDistance
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1166988121205289109, guid: 6aef0386cb28edc499fff908da4c1faf, type: 3}
-      propertyPath: waypoints.Array.size
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 1166988121205289109, guid: 6aef0386cb28edc499fff908da4c1faf, type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
@@ -1057,8 +1049,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2137191033}
     - target: {fileID: 6387443618297234335, guid: 6aef0386cb28edc499fff908da4c1faf, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 6387443618297234335, guid: 6aef0386cb28edc499fff908da4c1faf, type: 3}
       propertyPath: m_Name
       value: Enemy_A
+      objectReference: {fileID: 0}
+    - target: {fileID: 6387443618297234335, guid: 6aef0386cb28edc499fff908da4c1faf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6390800160838006239, guid: 6aef0386cb28edc499fff908da4c1faf, type: 3}
       propertyPath: m_RootOrder
@@ -1470,14 +1470,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2057647791}
     m_Modifications:
-    - target: {fileID: 5514250334278941572, guid: f39e4a1c0130d0149b6a0e2b52860702, type: 3}
-      propertyPath: have_mele_weapon
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5514250334278941572, guid: f39e4a1c0130d0149b6a0e2b52860702, type: 3}
-      propertyPath: have_ranged_weapon
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 5514250334278941576, guid: f39e4a1c0130d0149b6a0e2b52860702, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 5514250334278941576, guid: f39e4a1c0130d0149b6a0e2b52860702, type: 3}
       propertyPath: m_Name
       value: Enemy_B

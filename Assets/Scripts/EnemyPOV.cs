@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyPOV : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class EnemyPOV : MonoBehaviour
     private Vector3 m_Movement;
     [SerializeField] private Animator m_Animator;
     [SerializeField] private Rigidbody m_Rigidbody;
+    [SerializeField] private NavMeshAgent navMeshAgent;
 
     [SerializeField] public float turnSpeed = 60f;
     private Quaternion m_Rotation = Quaternion.identity;
@@ -25,6 +27,7 @@ public class EnemyPOV : MonoBehaviour
     {
         m_Animator = GetComponentInParent<Animator>();
         m_Rigidbody = GetComponentInParent<Rigidbody>();
+        navMeshAgent = GetComponentInParent<NavMeshAgent>();
     }
 
     void OnTriggerEnter(Collider other)
@@ -34,6 +37,7 @@ public class EnemyPOV : MonoBehaviour
             target = other.transform;
             m_IsPlayerInRange = true;
             m_lostContact = m_lostTime;
+            navMeshAgent.enabled = false;
         }
     }
 
@@ -86,6 +90,7 @@ public class EnemyPOV : MonoBehaviour
             m_IsPlayerInRange = false;
             m_isPlayerVisible = false;
             enemy.m_isPlayerVisible = m_isPlayerVisible;
+            navMeshAgent.enabled = true;
         }
     }
 
