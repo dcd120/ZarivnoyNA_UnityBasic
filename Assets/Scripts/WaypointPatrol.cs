@@ -5,14 +5,16 @@ using UnityEngine.AI;
 
 public class WaypointPatrol : MonoBehaviour
 {
-    [SerializeField] NavMeshAgent navMeshAgent;
-    [SerializeField] Transform[] waypoints;
-    [SerializeField] Animator m_Animator;
+    [SerializeField] private NavMeshAgent navMeshAgent;
+    [SerializeField] public Transform[] waypoints;
+    [SerializeField] private Animator m_Animator;
 
     private int m_CurrentWaypointIndex;
 
     void Start()
     {
+        navMeshAgent = GetComponentInParent<NavMeshAgent>();
+        m_Animator = GetComponentInParent<Animator>();
         if (waypoints.Length == 0) return;
         navMeshAgent.SetDestination(waypoints[0].position);
     }

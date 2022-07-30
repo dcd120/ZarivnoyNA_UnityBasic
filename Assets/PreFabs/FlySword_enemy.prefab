@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aef95881bd6a19d419f1595bd12cee5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
   throwSound: {fileID: 7019791199422935729}
   boomSound: {fileID: 4734239257772630742}
   lifeTime: 10

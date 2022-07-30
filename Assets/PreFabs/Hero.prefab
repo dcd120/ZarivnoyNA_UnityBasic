@@ -2481,7 +2481,7 @@ GameObject:
   m_Layer: 0
   m_Name: Hero
   m_TagString: Player
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2516,7 +2516,7 @@ Animator:
   m_GameObject: {fileID: 2604791759765429169}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 7e30eee73c241d5448ce0ac372cf6602, type: 3}
-  m_Controller: {fileID: 9100000, guid: d7c55390ab0320c47b84f63184ecb1b9, type: 2}
+  m_Controller: {fileID: 9100000, guid: a8fadca237eb18349a6d0a58954fafcf, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 1
   m_ApplyRootMotion: 1
@@ -2580,8 +2580,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 158d4773cef370644a4c7072301cd625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  maxHealth: 3
+  canRegenerate: 0
   regeneration: 0.01
+  isAlive: 1
   theOne: {fileID: 0}
 --- !u!54 &2603757761373444431
 Rigidbody:
@@ -2622,12 +2624,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2604791759765429169}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b786401d23800c4e87f66d35e93f413, type: 3}
+  m_Script: {fileID: 11500000, guid: a96cabde14dbdd64f993083f26570a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   turnSpeed: 20
   jumpPower: 1.5
-  fire: {fileID: 4910579350884363212, guid: 383451200947feb4e9f9cbb8b34cf3be, type: 3}
+  fire: {fileID: 4910579350884363212, guid: 0de6482afffa5bd4f87a92ea80073d0d, type: 3}
 --- !u!82 &632892644647725270
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2928,7 +2930,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2608219617233544023
 Transform:
   m_ObjectHideFlags: 0

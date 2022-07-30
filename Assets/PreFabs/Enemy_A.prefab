@@ -1480,6 +1480,11 @@ GameObject:
   - component: {fileID: 6356471775988284596}
   - component: {fileID: 4375916346269758355}
   - component: {fileID: 7321262855375747741}
+  - component: {fileID: 2034414016848155695}
+  - component: {fileID: 8819107570899765643}
+  - component: {fileID: 7965857530487809770}
+  - component: {fileID: -2739548588873964151}
+  - component: {fileID: 1166988121205289109}
   m_Layer: 0
   m_Name: Enemy_A
   m_TagString: Untagged
@@ -1518,7 +1523,7 @@ Animator:
   m_GameObject: {fileID: 6387443618297234335}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 7e30eee73c241d5448ce0ac372cf6602, type: 3}
-  m_Controller: {fileID: 9100000, guid: d7c55390ab0320c47b84f63184ecb1b9, type: 2}
+  m_Controller: {fileID: 9100000, guid: a8fadca237eb18349a6d0a58954fafcf, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1613,8 +1618,98 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
+  canRegenerate: 0
   regeneration: 0.01
+  isAlive: 1
   theOne: {fileID: 0}
+--- !u!114 &2034414016848155695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6387443618297234335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08becba9d013e2b4e99bafd349f4e55f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyRangedWeapon: {fileID: 7965857530487809770}
+  m_EnemyMeleeWeapon: {fileID: 8819107570899765643}
+  maxSpeed: 10
+  m_Target: {fileID: 0}
+  m_Rotation: {x: 0, y: 0, z: 0, w: 1}
+  m_isPlayerVisible: 0
+  direction: {x: 0, y: 0, z: 0}
+  have_ranged_weapon: 1
+  have_mele_weapon: 0
+  m_CoolDownRanged: 5
+  m_CoolDownMele: 3
+  m_MeleeRange: 1
+--- !u!114 &8819107570899765643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6387443618297234335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e808dd0315406cd488c867eb20e9d286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BladeCollider: {fileID: 8565908191018200451}
+  m_SlashTime: 0.2
+--- !u!114 &7965857530487809770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6387443618297234335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ab0e7ad1c5d6ef4daf95461683ba7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fire: {fileID: 7838534706752336510, guid: 3a29a0923c004db4e8c5f99712a2b29d, type: 3}
+--- !u!195 &-2739548588873964151
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6387443618297234335}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &1166988121205289109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6387443618297234335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f55e8f170c12e846818bb06e0cab2b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  navMeshAgent: {fileID: -2739548588873964151}
+  waypoints: []
+  m_Animator: {fileID: 0}
 --- !u!1 &6387446647565401603
 GameObject:
   m_ObjectHideFlags: 0
@@ -1818,6 +1913,7 @@ GameObject:
   - component: {fileID: 6390454106469001845}
   - component: {fileID: 6401748047845732251}
   - component: {fileID: 6409217303700504775}
+  - component: {fileID: 8565908191018200451}
   m_Layer: 0
   m_Name: Sword_3
   m_TagString: Untagged
@@ -1890,6 +1986,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &8565908191018200451
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6387518150103280047}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.1
+  m_Height: 0.9
+  m_Direction: 2
+  m_Center: {x: 0.00000199548, y: 0.0041914564, z: 0.43318257}
 --- !u!1 &6387518374415546991
 GameObject:
   m_ObjectHideFlags: 0
@@ -4213,7 +4323,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6390666088566663585
 Transform:
   m_ObjectHideFlags: 0

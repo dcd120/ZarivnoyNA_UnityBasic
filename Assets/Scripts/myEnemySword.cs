@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class myEnemySword : MonoBehaviour
 {
+    [SerializeField] public string playerTag = "Player";
     [SerializeField] public int damage = 1;
 
     [SerializeField] public AudioSource slashSound;
@@ -23,7 +24,7 @@ public class myEnemySword : MonoBehaviour
     // Update is called once per frame
     void OnTriggerEnter(Collider other)
     {
-        if ((other.tag == "Player") && (canHit))
+        if ((other.tag == playerTag) && (canHit))
         {
             slashSound.Play();
             canHit = false;

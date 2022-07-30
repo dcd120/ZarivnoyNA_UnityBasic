@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class EnemyPOV : MonoBehaviour
 {
-    [SerializeField] public Transform player;
-    [SerializeField] public myEnemy enemy;
+    [SerializeField] public string playerTag = "Player";
+    [SerializeField] private Transform target;
+    [SerializeField] private myEnemy enemy;
 
     private Vector3 m_Movement;
-    [SerializeField]  public Animator m_Animator;
-    [SerializeField]  public Rigidbody m_Rigidbody;
+    [SerializeField] private Animator m_Animator;
+    [SerializeField] private Rigidbody m_Rigidbody;
 
     [SerializeField] public float turnSpeed = 60f;
     private Quaternion m_Rotation = Quaternion.identity;
@@ -22,13 +23,15 @@ public class EnemyPOV : MonoBehaviour
     [SerializeField] public float m_lostTime = 2f;
     void Start()
     {
-
+        m_Animator = GetComponentInParent<Animator>();
+        m_Rigidbody = GetComponentInParent<Rigidbody>();
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.transform == player)
+        if (other.transform.tag == playerTag)
         {
+            target = other.transform;
             m_IsPlayerInRange = true;
             m_lostContact = m_lostTime;
         }
@@ -36,7 +39,7 @@ public class EnemyPOV : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.transform == player)
+        if (other.transform.tag == playerTag)
         {
             m_lostContact = m_lostTime;
 
@@ -49,14 +52,14 @@ public class EnemyPOV : MonoBehaviour
         {
             if (!m_IsPlayerInRange) m_lostContact -= Time.fixedTime;
 
-            direction = player.position - transform.parent.position;
+            direction = target.position - transform.parent.position;
             Ray ray = new Ray(transform.parent.position + Vector3.up, direction);
             RaycastHit raycastHit;
 
             if (Physics.Raycast(ray, out raycastHit))
             {
                 Debug.DrawRay(transform.parent.position + Vector3.up, direction, Color.red, 1);
-                if (raycastHit.collider.transform == player)
+                if (raycastHit.collider.transform == target)
                 {
                     m_isPlayerVisible = true;
                     // пусть солдат тогда бежит на игрока
@@ -68,8 +71,7 @@ public class EnemyPOV : MonoBehaviour
                     enemy.m_isPlayerVisible = m_isPlayerVisible;
                     enemy.m_Rotation = m_Rotation;
                     enemy.direction = direction;
-                    enemy.m_Target = player;
-
+                    enemy.m_Target = target;
                 }
                 else
                 {

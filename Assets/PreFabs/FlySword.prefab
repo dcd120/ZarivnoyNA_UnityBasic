@@ -63,7 +63,7 @@ GameObject:
   m_Layer: 0
   m_Name: FlySword
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -144,14 +144,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4910579350884268012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46a741c5084f13a4db2de84fd3bb139c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e6ab4abcdc5e3d418604ea6838372e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
   throwSound: {fileID: 2607162034846650520}
   boomSound: {fileID: 9222971566520420564}
   lifeTime: 10
   deathTime: 3
-  flyStartPos: 0.3
+  flyStartPos: 0.1
 --- !u!54 &5612550009209029034
 Rigidbody:
   m_ObjectHideFlags: 0
