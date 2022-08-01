@@ -22,6 +22,7 @@ public class WaypointPatrol : MonoBehaviour
     void Update()
     {
         if (waypoints.Length == 0) return;
+        if (!navMeshAgent.isActiveAndEnabled) return;
         m_Animator.SetBool("IsWalking", true);
         if (navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance)
         {

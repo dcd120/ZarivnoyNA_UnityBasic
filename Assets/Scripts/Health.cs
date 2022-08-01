@@ -15,9 +15,14 @@ public class Health : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        theOne = transform.parent.transform;
+        theOne = transform;
         cHealth = maxHealth;
         isAlive = true;
+    }
+
+    public string GetHealthUIString()
+    {
+        return $"{cHealth}/{maxHealth}";
     }
 
     // Update is called once per frame
@@ -34,6 +39,11 @@ public class Health : MonoBehaviour
                 cHealth++;
             }
         }
+    }
+
+    public bool IsWounded()
+    {
+        return cHealth < maxHealth;
     }
     public void Kill()
     {

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class myHero : MonoBehaviour
 {
@@ -8,6 +10,11 @@ public class myHero : MonoBehaviour
     private Animator m_Animator;
     private Rigidbody m_Rigidbody;
     private AudioSource m_FootSteps;
+    private Health m_Health;
+
+    [SerializeField] public string m_HeroName = "Leonard";
+    [SerializeField] public TMP_Text m_HeroInfoUI;
+    //private TMP_Text m_HeroInfo;
 
     [SerializeField] public float turnSpeed = 20f;
     [SerializeField] public float jumpPower = 1.5f;
@@ -21,11 +28,20 @@ public class myHero : MonoBehaviour
         m_Animator = GetComponent<Animator>();
         m_Rigidbody = GetComponent<Rigidbody>();
         m_FootSteps = GetComponent<AudioSource>();
+        m_Health = GetComponent<Health>();
+        //m_HeroInfo = m_HeroInfoUI.GetComponent<TextMeshPro>();
+    }
+
+    private void UpdateInfo()
+    {
+        m_HeroInfoUI.text = $"{m_HeroName}\nHP:{m_Health.GetHealthUIString()}";
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdateInfo();
+
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
