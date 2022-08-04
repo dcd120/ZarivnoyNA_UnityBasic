@@ -11,18 +11,38 @@ public class mySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lastSpawn = Time.fixedTime;
+        //Spawn();
+        //lastSpawn = Time.fixedTime;
+    }
+
+    private void OnEnable()
+    {
+        StartCoroutine(Spawn());
+    }
+
+    private void OnDisable()
+    {
+        StopCoroutine(Spawn());
+        //Destroy(gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.fixedTime > lastSpawn + spawnTime)
-        {
+        //if (Time.fixedTime > lastSpawn + spawnTime)
+       // {
             // выпускаем зверя
-            Instantiate(spawnItem, transform.position + transform.up + transform.up, transform.rotation);
+            
             // перезапускаем счетчик
-            lastSpawn = Time.fixedTime;
+       //     lastSpawn = Time.fixedTime;
+        //}
+    }
+    private IEnumerator Spawn()
+    {
+        while (enabled)
+        {
+            Instantiate(spawnItem, transform.position + transform.up + transform.up, transform.rotation);
         }
+        yield return null;
     }
 }

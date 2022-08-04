@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CapsuleCollider))]
+[RequireComponent(typeof(Rigidbody))]
+
 public class FlyingSword_e : MonoBehaviour
 {
     private CapsuleCollider m_CapsuleCollider;
