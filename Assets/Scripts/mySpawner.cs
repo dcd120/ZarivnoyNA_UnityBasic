@@ -13,17 +13,19 @@ public class mySpawner : MonoBehaviour
     {
         //Spawn();
         //lastSpawn = Time.fixedTime;
+        InvokeRepeating(nameof(Spawn_2), 0f, spawnTime);
     }
 
     private void OnEnable()
     {
-        StartCoroutine(Spawn());
+        //StartCoroutine(Spawn());
     }
 
     private void OnDisable()
     {
-        StopCoroutine(Spawn());
+        //StopCoroutine(Spawn());
         //Destroy(gameObject);
+        CancelInvoke(nameof(Spawn_2));
     }
 
     // Update is called once per frame
@@ -42,7 +44,13 @@ public class mySpawner : MonoBehaviour
         while (enabled)
         {
             Instantiate(spawnItem, transform.position + transform.up + transform.up, transform.rotation);
+            yield return new WaitForSeconds(spawnTime);
         }
         yield return null;
+    }
+
+    private void Spawn_2()
+    {
+        Instantiate(spawnItem, transform.position + transform.up + transform.up, transform.rotation);
     }
 }

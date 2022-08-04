@@ -11,8 +11,10 @@ public class myHero : MonoBehaviour
     private Rigidbody m_Rigidbody;
     private AudioSource m_FootSteps;
     private Health m_Health;
+    private bool isGrounded;
 
     [SerializeField] public string m_HeroName = "Leonard";
+    [SerializeField] public string m_groundTag = "Titles";
     [SerializeField] public TMP_Text m_HeroInfoUI;
     //private TMP_Text m_HeroInfo;
 
@@ -29,6 +31,7 @@ public class myHero : MonoBehaviour
         m_Rigidbody = GetComponent<Rigidbody>();
         m_FootSteps = GetComponent<AudioSource>();
         m_Health = GetComponent<Health>();
+        isGrounded = true;
         //m_HeroInfo = m_HeroInfoUI.GetComponent<TextMeshPro>();
     }
 
@@ -73,7 +76,7 @@ public class myHero : MonoBehaviour
         Vector3 desiredForward = Vector3.RotateTowards(transform.forward, m_Movement, turnSpeed * Time.deltaTime, 0f);
         m_Rotation = Quaternion.LookRotation(desiredForward);
 
-        if ((is_jump) && (m_Rigidbody.position.y < 0.1))
+        if ((is_jump) && (isGrounded))
         {
             m_Rigidbody.AddForce(0, jumpPower, 0, ForceMode.Impulse);
         }
@@ -90,5 +93,15 @@ public class myHero : MonoBehaviour
         m_Rigidbody.MovePosition(m_Rigidbody.position + m_Movement * m_Animator.deltaPosition.magnitude);
         m_Rigidbody.MoveRotation(m_Rotation);
         //Debug.Log($"Hero rot:{m_Rotation}");
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        isGrounded = collision.gameObject.CompareTag(m_groundTag);
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        isGrounded = !collision.gameObject.CompareTag(m_groundTag);
     }
 }
