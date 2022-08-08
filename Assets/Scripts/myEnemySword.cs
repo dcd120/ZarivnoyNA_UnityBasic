@@ -2,37 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class myEnemySword : MonoBehaviour
+namespace EI2
 {
-    [SerializeField] public string playerTag = "Player";
-    [SerializeField] public int damage = 1;
-
-    [SerializeField] public AudioSource slashSound;
-
-    private bool canHit = true;
-    [SerializeField] public float resetTime = 0.2f;
-    private float timeToReset;
-
-    // Start is called before the first frame update
-    private void FixedUpdate()
+    public class myEnemySword : MonoBehaviour
     {
-        if (canHit) return;
-        timeToReset -= Time.fixedTime;
-        if (timeToReset <= 0) canHit = true;
-    }
+        [SerializeField] public string playerTag = "Player";
+        [SerializeField] public int damage = 1;
 
-    // Update is called once per frame
-    void OnTriggerEnter(Collider other)
-    {
-        if ((other.tag == playerTag) && (canHit))
+        [SerializeField] public AudioSource slashSound;
+
+        private bool canHit = true;
+        [SerializeField] public float resetTime = 0.2f;
+        private float timeToReset;
+
+        // Start is called before the first frame update
+        private void FixedUpdate()
         {
-            slashSound.Play();
-            canHit = false;
+            if (canHit) return;
+            timeToReset -= Time.fixedTime;
+            if (timeToReset <= 0) canHit = true;
+        }
 
-            // проигрышь )
-            other.GetComponent<Health>().GetDamage(damage);
+        // Update is called once per frame
+        void OnTriggerEnter(Collider other)
+        {
+            if ((other.tag == playerTag) && (canHit))
+            {
+                slashSound.Play();
+                canHit = false;
 
-            timeToReset = resetTime * 1000;
+                // проигрышь )
+                other.GetComponent<Health>().GetDamage(damage);
+
+                timeToReset = resetTime * 1000;
+            }
         }
     }
 }

@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace EI2
+{
     // Start is called before the first frame update
     [System.Serializable]
     public class myScanner : MonoBehaviour
-{
+    {
         public float heightOffset = 0.0f;
         public float detectionRadius = 10;
         [Range(0.0f, 360.0f)]
@@ -79,3 +81,4 @@ using UnityEngine;
 
 #endif
     }
+}

@@ -147,6 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6ab4abcdc5e3d418604ea6838372e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingPower: 1
+  fadingOfPower: 0.01
   damage: 1
   throwSound: {fileID: 2607162034846650520}
   boomSound: {fileID: 9222971566520420564}
