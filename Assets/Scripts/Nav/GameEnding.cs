@@ -8,9 +8,11 @@ namespace EI2
     public class GameEnding : MonoBehaviour
     {
         [SerializeField] public float fadeDuration = 1f;
-        [SerializeField] public float displayImageDuration = 10f;
+        [SerializeField] public float displayImageDuration = 3f;
         [SerializeField] public GameObject player;
         [SerializeField] public CanvasGroup exitBackgroundImageCanvasGroup;
+
+        [SerializeField] public string nextLevel;
 
         private bool m_IsPlayerAtExit = false;
         private float m_Timer;
@@ -40,7 +42,7 @@ namespace EI2
             if (m_Timer > fadeDuration + displayImageDuration)
             {
                 //Application.Quit();
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(nextLevel);
             }
         }
     }

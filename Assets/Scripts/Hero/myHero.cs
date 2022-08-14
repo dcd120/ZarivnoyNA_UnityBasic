@@ -16,6 +16,8 @@ namespace EI2
         private Health m_Health;
         private bool isGrounded;
 
+        bool isWalking = false;
+
         /// <summary>
         /// готовность открыть огонь, true - готов открыть, false - не готов
         /// </summary>
@@ -24,8 +26,12 @@ namespace EI2
 
         [SerializeField] public string m_HeroName = "Leonard";
         [SerializeField] public string m_groundTag = "Titles";
+        [SerializeField] public string m_isWalkingKey = "IsWalking";
         [SerializeField] public TMP_Text m_HeroInfoUI;
         [SerializeField] public Transform m_Pointer;
+
+        [SerializeField] public float m_LowerSteps = 0.75f;
+        [SerializeField] public float m_StrongSteps = 1.5f;
 
         /// <summary>
         /// ¬рем€ "остывани€" метательного оружи€ геро€
@@ -58,55 +64,65 @@ namespace EI2
             m_HeroInfoUI.text = $"{m_HeroName}\nHP:{m_Health.GetHealthUIString()}";
         }
 
-        // Update is called once per frame
-        void Update()
+        private void UpdateMove()
         {
-            // проверка, что будет, если в апдейт добавить while
-            //int i = 0;
-            //while (i < 100)
-            //{
-            //    i++;
-            //}
-
-            UpdateInfo();
-
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
 
-            float jump = Input.GetAxis("Jump");
-
             m_Movement.Set(horizontal, 0f, vertical);
             Debug.DrawRay(transform.position, m_Movement * 5, Color.red);
+
             m_Movement += transform.forward * 0.001f;
             // надо скорректировать относительно поворота персонажа!
             Debug.Log($"horizontal: {horizontal} / vertical: {vertical}");
-
             Debug.DrawRay(transform.position, m_Movement * 3, Color.blue);
-            
-            m_Movement.Normalize();
 
+            m_Movement.Normalize();
             Debug.DrawRay(transform.position, m_Movement, Color.yellow, 0.5f);
 
             bool hasHorizontalInput = !Mathf.Approximately(horizontal, 0f);
             bool hasVerticalInput = !Mathf.Approximately(vertical, 0f);
+
+            isWalking = hasHorizontalInput || hasVerticalInput;
+            m_Animator.SetBool(m_isWalkingKey, isWalking);
+
+
+        }
+
+        private void Jumping()
+        {
+            float jump = Input.GetAxis("Jump");
             bool is_jump = !Mathf.Approximately(jump, 0f);
 
-            bool isWalking = hasHorizontalInput || hasVerticalInput;
-
-            m_Animator.SetBool("IsWalking", isWalking);
-
-            if (isWalking)
+            if ((is_jump) && (isGrounded))
             {
-                if (!m_FootSteps.isPlaying)
+                m_Rigidbody.AddForce(0, jumpPower, 0, ForceMode.Impulse);
+                Debug.Log("Jump!");
+            }
+        }
+
+        private void Fire()
+        {
+            if (!readyToFire)
+            {
+                if (Time.fixedTime > rechargeTime + timeToRechargeFire)
                 {
-                    m_FootSteps.Play();
+                    readyToFire = true;
                 }
             }
-            else
-            {
-                m_FootSteps.Stop();
-            }
 
+            if (Input.GetButtonDown("Fire1") && (readyToFire))
+            {
+                //Debug.Log($"m_LookUp: {m_LookUp} / Hero forward: {transform.forward} / desiredForward: {desiredForward}");
+                Instantiate(fire, m_Rigidbody.position + transform.forward + transform.up, m_Rigidbody.rotation);
+                readyToFire = false;
+                timeToRechargeFire = Time.fixedTime;
+                // —оздаем _mine в точке _mineSpawnPlace
+            }
+        }
+
+        private void RotateUpdate()
+        {
             //Vector3 desiredForward = Vector3.RotateTowards(transform.forward, m_Movement, turnSpeed * Time.deltaTime, 0f);
             //m_Rotation = Quaternion.LookRotation(desiredForward);
             // сделаем слежение за мышкой
@@ -129,30 +145,48 @@ namespace EI2
             //Debug.DrawRay(transform.position, desiredForward, Color.magenta, 1f, false);
 
             m_Rotation = Quaternion.LookRotation(desiredForward);
+        }
 
-            if ((is_jump) && (isGrounded))
-            {
-                m_Rigidbody.AddForce(0, jumpPower, 0, ForceMode.Impulse);
-                Debug.Log("Jump!");
-            }
+        // Update is called once per frame
+        void Update()
+        {
+            UpdateInfo();
+            UpdateMove();
+            RotateUpdate();
+            Jumping();
+            Fire();
+            PlayAudio();
+        }
 
-            if (!readyToFire)
+        private void PlayAudio()
+        {
+            if (isWalking)
             {
-                if (Time.fixedTime > rechargeTime + timeToRechargeFire)
+                if (!m_FootSteps.isPlaying)
                 {
-                    readyToFire = true;
+                    m_FootSteps.Play();
+                    StartCoroutine(routine: PitchSwitcher());
                 }
             }
-
-            if (Input.GetButtonDown("Fire1") && (readyToFire))
+            else
             {
-                //Debug.Log($"m_LookUp: {m_LookUp} / Hero forward: {transform.forward} / desiredForward: {desiredForward}");
-                Instantiate(fire, m_Rigidbody.position + transform.forward + transform.up, m_Rigidbody.rotation);
-                readyToFire = false;
-                timeToRechargeFire = Time.fixedTime;
-                // —оздаем _mine в точке _mineSpawnPlace
+                if (m_FootSteps.isPlaying)
+                {
+                    m_FootSteps.Stop();
+                    //StopCoroutine(routine: PitchSwitcher());
+                }
             }
+        }
 
+        // добавим усиление громкости шагов, при зар€женном оружии
+        private IEnumerator PitchSwitcher()
+        {
+            while (m_FootSteps.isPlaying)
+            {
+                m_FootSteps.pitch = readyToFire ? m_StrongSteps : m_LowerSteps;
+                yield return new WaitForEndOfFrame();
+            }
+            yield return null;
         }
         void OnAnimatorMove()
         {

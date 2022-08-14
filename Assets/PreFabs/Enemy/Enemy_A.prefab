@@ -61,7 +61,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTag: Player
   target: {fileID: 0}
-  enemy: {fileID: 2034414016848155695}
   m_Animator: {fileID: 6482277484134512967}
   m_Rigidbody: {fileID: 4375916346269758355}
   navMeshAgent: {fileID: 0}
@@ -1554,8 +1553,8 @@ GameObject:
   - component: {fileID: 1166988121205289109}
   m_Layer: 0
   m_Name: Enemy_A
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_TagString: Enemy
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1690,6 +1689,7 @@ MonoBehaviour:
   regeneration: 0.01
   isAlive: 1
   theOne: {fileID: 0}
+  removingTime: 2
 --- !u!114 &2034414016848155695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1727,7 +1727,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BladeCollider: {fileID: 8565908191018200451}
-  m_SlashTime: 0.2
 --- !u!114 &7965857530487809770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1770,7 +1769,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6387443618297234335}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f55e8f170c12e846818bb06e0cab2b6, type: 3}
   m_Name: 
